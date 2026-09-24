@@ -1,0 +1,47 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block title %}Manage Users - Admin | FarmEase{% endblock %}
+{% block header_title %}User Management Registry{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0">Registered Platform Users ({{ users|length }})</h5>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>#{{ u.id }}</td>
+                    <td class="fw-bold">{{ u.name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>+91 {{ u.phone }}</td>
+                    <td>
+                        <span class="badge {% if u.role == 'admin' %}bg-warning text-dark{% else %}bg-info-subtle text-info border border-info-subtle{% endif %} rounded-pill">
+                            {{ u.role }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {% if u.status == 'active' %}bg-success{% else %}bg-danger{% endif %} rounded-pill">
+                            {{ u.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}My Profile & Booking History - FarmEase{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light mt-4">
+    <div class="container pt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show mb-4" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="row g-4">
+            <!-- Profile Sidebar -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-white mb-4">
+                    <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 fs-2 fw-bold" style="width: 80px; height: 80px;">
+                        {{ session.user_name[0] if session.user_name else 'F' }}
+                    </div>
+                    <h4 class="fw-bold mb-1">{{ session.user_name }}</h4>
+                    <p class="text-muted small mb-3">{{ session.user_email }}</p>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2 fw-semibold w-auto mx-auto mb-4">
+                        Verified Farmer
+                    </span>
+
+                    <div class="border-top pt-3 text-start">
+                        <a href="/logout" class="btn btn-outline-danger w-100 rounded-3 fw-semibold">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking History -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                        <h4 class="fw-bold mb-0">My Equipment Bookings</h4>
+                        <span class="badge bg-secondary rounded-pill fs-6 px-3 py-1">{{ bookings|length }} Reservations</span>
+                    </div>
+
+                    {% if bookings %}
+                        <div class="d-flex flex-column gap-3">
+                            {% for b in bookings %}
+                            <div class="p-3 border rounded-3 bg-light">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-md-2 col-3 text-center">
+                                        <img src="{{ url_for('static', filename='images/equipment/' ~ (b.image or 'tractor.png')) }}" alt="Equipment" class="img-fluid rounded" style="max-height: 60px; object-fit: contain;">
+                                    </div>
+                                    <div class="col-md-6 col-9">
+                                        <h5 class="fw-bold mb-1">{{ b.equipment_name }}</h5>
+                                        <div class="text-muted small mb-1">
+                                            <i class="fa-solid fa-calendar me-1 text-success"></i> {{ b.start_date }} to {{ b.end_date }} ({{ b.days }} days)
+                                        </div>
+                                        <div class="text-muted small">
+                                            <i class="fa-solid fa-location-dot me-1 text-danger"></i> {{ b.location or 'Coimbatore' }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-md-end">
+                                        <span class="badge {% if b.status == 'Confirmed' %}bg-success{% elif b.status == 'Pending' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-pill px-3 py-2 fw-semibold mb-2 d-inline-block">
+                                            {{ b.status }}
+                                        </span>
+                                        <div class="fw-bold text-success fs-5">₹{{ "{:,.2f}".format(b.total_amount) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5 text-muted">
+                            <i class="fa-solid fa-calendar-xmark fs-1 mb-3 text-secondary"></i>
+                            <h5>No equipment bookings found yet</h5>
+                            <p class="small mb-3">Find and book tractors, harvesters, or tools from our marketplace.</p>
+                            <a href="/equipment" class="btn btn-success rounded-pill px-4">Explore Marketplace</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

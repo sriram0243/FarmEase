@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Farmer Login - FarmEase{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light min-vh-80 d-flex align-items-center mt-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <div class="text-center mb-4">
+                        <span class="fs-1">🌾</span>
+                        <h3 class="fw-bold mt-2">Welcome Back</h3>
+                        <p class="text-muted small">Login to manage equipment rentals and bookings</p>
+                    </div>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form action="/login" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                <input type="email" name="email" class="form-control" placeholder="farmer@farmease.com" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label fw-semibold">Password</label>
+                                <a href="#" class="small text-success text-decoration-none">Forgot password?</a>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 py-3 rounded-3 fw-bold fs-6 shadow-sm mb-3">
+                            Login to Account
+                        </button>
+                    </form>
+
+                    <div class="p-3 bg-light rounded-3 small text-muted text-center mb-3">
+                        <strong>Demo Accounts:</strong><br>
+                        Farmer: <code>farmer@farmease.com</code> | Pass: <code>password123</code><br>
+                        Admin: <code>admin@farmease.com</code> | Pass: <code>password123</code>
+                    </div>
+
+                    <div class="text-center text-muted small">
+                        Don't have an account? <a href="/register" class="text-success fw-bold text-decoration-none">Register Here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

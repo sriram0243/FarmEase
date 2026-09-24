@@ -1,0 +1,131 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Confirm Booking - {{ equipment.name }} | FarmEase{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="booking-hero py-4 mt-4">
+    <div class="container pt-3">
+        <h2 class="fw-bold mb-1">Equipment Reservation Form</h2>
+        <p class="mb-0 text-white-50">Review rental dates, equipment specifications, and confirm your booking.</p>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show mb-4" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="row g-4">
+            <!-- Left: Form -->
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <h4 class="fw-bold mb-4 border-bottom pb-3">Booking Details</h4>
+
+                    <form action="/booking/{{ equipment.id }}" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Renter Name</label>
+                            <input type="text" class="form-control bg-light" value="{{ session.user_name }}" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Renter Email</label>
+                            <input type="email" class="form-control bg-light" value="{{ session.user_email }}" readonly>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
+                                <input type="date" id="startDateInput" name="start_date" class="form-control" value="{{ start_date }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
+                                <input type="date" id="endDateInput" name="end_date" class="form-control" value="{{ end_date }}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Farmer Notes / Special Field Instructions (Optional)</label>
+                            <textarea name="notes" class="form-control" rows="3" placeholder="Specify field location details, soil condition, or preferred delivery timing..."></textarea>
+                        </div>
+
+                        <div class="alert alert-warning border-warning-subtle small d-flex gap-2 align-items-center mb-4">
+                            <i class="fa-solid fa-shield-halved fs-4 text-warning"></i>
+                            <div>
+                                <strong>Double-Booking Guarantee:</strong> Our system validates live availability. Once confirmed, this equipment is reserved exclusively for your selected dates.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-lg w-100 rounded-3 fw-bold py-3">
+                            <i class="fa-solid fa-check-circle me-2"></i> Confirm Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right: Equipment Summary Sidebar -->
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style="top: 100px;">
+                    <h5 class="fw-bold mb-3 border-bottom pb-3">Rental Summary</h5>
+
+                    <div class="d-flex gap-3 align-items-center mb-3">
+                        <img src="{{ url_for('static', filename='images/equipment/' ~ equipment.image) }}" alt="{{ equipment.name }}" class="img-fluid rounded-3 bg-light p-2" style="width: 90px; height: 75px; object-fit: contain;">
+                        <div>
+                            <h5 class="fw-bold mb-1">{{ equipment.name }}</h5>
+                            <span class="text-muted small">📍 {{ equipment.location }} • ⭐ {{ equipment.rating }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-light rounded-3 mb-3">
+                        <div class="d-flex justify-content-between text-muted small mb-1">
+                            <span>Equipment Rate</span>
+                            <span>₹{{ "{:,.0f}".format(equipment.price_per_day) }} / day</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted small mb-1">
+                            <span>Horsepower</span>
+                            <span>{{ equipment.hp }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted small">
+                            <span>Owner</span>
+                            <span>{{ equipment.owner_name }}</span>
+                        </div>
+                    </div>
+
+                    <div id="priceCalculationBox" class="p-3 border border-success-subtle bg-success-subtle rounded-3 mb-3 d-none">
+                        <div class="d-flex justify-content-between text-dark small mb-1">
+                            <span>Duration</span>
+                            <span id="selectedDaysText">0 days</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold text-dark fs-5 border-top pt-2">
+                            <span>Total Payably</span>
+                            <span id="totalPriceText" class="text-success">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center text-muted small">
+                        <i class="fa-solid fa-lock me-1"></i> Secure 256-bit Encrypted Reservation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const equipmentPrice = {{ equipment.price_per_day }};
+</script>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

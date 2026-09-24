@@ -1,0 +1,97 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block title %}Admin Dashboard - FarmEase{% endblock %}
+{% block header_title %}System Metrics & Dashboard Overview{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card-admin p-4 bg-white shadow-sm border-0">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted small fw-semibold text-uppercase">Total Users</span>
+                <div class="badge bg-primary-subtle text-primary p-2 fs-5"><i class="fa-solid fa-users"></i></div>
+            </div>
+            <h2 class="fw-bold mb-0">{{ stats.users }}</h2>
+            <span class="text-success small fw-semibold">Active Farmers & Owners</span>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card-admin p-4 bg-white shadow-sm border-0">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted small fw-semibold text-uppercase">Total Equipment</span>
+                <div class="badge bg-success-subtle text-success p-2 fs-5"><i class="fa-solid fa-tractor"></i></div>
+            </div>
+            <h2 class="fw-bold mb-0">{{ stats.equipment }}</h2>
+            <span class="text-success small fw-semibold">Verified Machinery</span>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card-admin p-4 bg-white shadow-sm border-0">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted small fw-semibold text-uppercase">Total Bookings</span>
+                <div class="badge bg-info-subtle text-info p-2 fs-5"><i class="fa-solid fa-calendar-check"></i></div>
+            </div>
+            <h2 class="fw-bold mb-0">{{ stats.bookings }}</h2>
+            <span class="text-warning small fw-semibold">{{ stats.pending }} Pending Approval</span>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card-admin p-4 bg-white shadow-sm border-0">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted small fw-semibold text-uppercase">Platform Revenue</span>
+                <div class="badge bg-warning-subtle text-warning p-2 fs-5"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            </div>
+            <h2 class="fw-bold text-success mb-0">₹{{ "{:,.2f}".format(stats.revenue) }}</h2>
+            <span class="text-muted small">Total Rental Value</span>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Quick Management Links</h5>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <a href="/admin/equipment" class="btn btn-outline-success w-100 py-3 text-start fw-semibold rounded-3">
+                        <i class="fa-solid fa-plus-circle me-2"></i> Manage Equipment
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/admin/bookings" class="btn btn-outline-primary w-100 py-3 text-start fw-semibold rounded-3">
+                        <i class="fa-solid fa-list-check me-2"></i> View All Bookings
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/admin/users" class="btn btn-outline-dark w-100 py-3 text-start fw-semibold rounded-3">
+                        <i class="fa-solid fa-user-shield me-2"></i> View User Registry
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+            <h5 class="fw-bold mb-3">System Health</h5>
+            <div class="d-flex justify-content-between small text-muted mb-2">
+                <span>Database Connectivity</span>
+                <span class="badge bg-success">Active / Connected</span>
+            </div>
+            <div class="d-flex justify-content-between small text-muted mb-2">
+                <span>Double-Booking Shield</span>
+                <span class="badge bg-success">Enabled</span>
+            </div>
+            <div class="d-flex justify-content-between small text-muted">
+                <span>Flask Session Security</span>
+                <span class="badge bg-success">Enabled</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

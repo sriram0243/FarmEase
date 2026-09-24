@@ -1,0 +1,26 @@
+/* Admin Panel Specific Styling */
+.admin-body {
+    background-color: #F8FAF7;
+}
+
+.admin-sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+}
+
+.admin-sidebar .list-group-item:hover, .admin-sidebar .list-group-item.active {
+    background-color: #1E293B !important;
+    color: #4CAF50 !important;
+}
+
+.stat-card-admin {
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+}
+
+.stat-card-admin:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}

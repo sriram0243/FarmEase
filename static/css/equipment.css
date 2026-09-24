@@ -1,0 +1,43 @@
+/* Equipment Marketplace Styles */
+.marketplace-header {
+    background: linear-gradient(to right, #F8FAF7, #FFFFFF);
+}
+
+.cat-pill {
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-weight: 500;
+    font-size: 13px;
+    background: #F1F5F9;
+    color: #475569;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s ease;
+}
+
+.cat-pill:hover, .cat-pill.active {
+    background: #2E7D32;
+    color: #FFFFFF;
+    border-color: #2E7D32;
+}
+
+.filter-card {
+    border-color: #E2E8F0 !important;
+}
+
+.equipment-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.equipment-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(46, 125, 50, 0.15);
+    border-color: rgba(46, 125, 50, 0.2);
+}

@@ -1,0 +1,219 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}FarmEase - Smart Farm Equipment Booking System{% endblock %}
+
+{% block content %}
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <span class="hero-tag">
+                        🚜 Smart Farming Starts Here
+                    </span>
+                    <h1>
+                        Book Farm Equipment <span>in Minutes</span>
+                    </h1>
+                    <p>
+                        Rent tractors, harvesters, rotavators and more from trusted owners with secure online booking.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="/equipment" class="btn-hero-primary">Book Equipment</a>
+                        <a href="/equipment" class="btn-hero-secondary">Explore Equipment</a>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-stars">⭐⭐⭐⭐⭐</span>
+                        <span>Trusted by 1,500+ Farmers across Tamil Nadu</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image-container">
+                    <img src="{{ url_for('static', filename='images/tractor.png') }}" alt="Farm Tractor" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTICS SECTION -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-card">
+                <div class="row">
+                    <div class="col-md-3 col-6 border-end-md">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-number" data-target="1500">0</div>
+                            <div class="stat-label">Happy Farmers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 border-end-md">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-tractor"></i></div>
+                            <div class="stat-number" data-target="120">0</div>
+                            <div class="stat-label">Verified Equipment</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 border-end-md">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div class="stat-number" data-target="3500">0</div>
+                            <div class="stat-label">Bookings Done</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-headset"></i></div>
+                            <div class="stat-number" style="display:inline-block">24/7</div>
+                            <div class="stat-label">Farmer Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE FARMEASE -->
+    <section class="features-section" id="about">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Why Choose FarmEase</span>
+                <h2 class="section-title">Designed for Modern Agriculture</h2>
+                <p class="section-desc">We bridge the gap between machinery owners and local farmers with transparency, affordability, and speed.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="feature-title">Verified Owners</h3>
+                        <p class="feature-desc">All tractors and implements listed are inspected for quality and reliable field operation.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <h3 class="feature-title">Instant Booking</h3>
+                        <p class="feature-desc">Check live availability calendars and book machinery in under 2 minutes without hassle.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <h3 class="feature-title">Transparent Pricing</h3>
+                        <p class="feature-desc">Clear daily rates with zero hidden charges. Pay per day or per operation mode easily.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Simple 3-Step Process</span>
+                <h2 class="section-title">How FarmEase Works</h2>
+                <p class="section-desc">Get the right machinery delivered to your field in three easy steps.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <div class="step-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                        <h3 class="step-title">Find Equipment</h3>
+                        <p class="step-desc">Browse tractors, harvesters, and implements by location and daily budget.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <div class="step-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                        <h3 class="step-title">Check Dates</h3>
+                        <p class="step-desc">Select available rental dates using our real-time interactive calendar.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <div class="step-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3 class="step-title">Confirm & Work</h3>
+                        <p class="step-desc">Confirm booking and get equipment delivered directly to your farmland.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPULAR EQUIPMENT PREVIEW -->
+    <section class="preview-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+                <div>
+                    <span class="section-subtitle">Top Rental Choices</span>
+                    <h2 class="section-title mb-0">Popular Machinery</h2>
+                </div>
+                <a href="/equipment" class="btn btn-outline-success rounded-pill px-4">View All Equipment →</a>
+            </div>
+            <div class="row" id="equipmentPreviewContainer"></div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Farmer Feedback</span>
+                <h2 class="section-title">Trusted by Real Farmers</h2>
+                <p class="section-desc">See what agricultural communities say about their experience with FarmEase.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Booking a harvester during peak season used to take days. With FarmEase, I secured a Kubota Harvester in 5 minutes!"</p>
+                        <div class="farmer-profile">
+                            <div class="farmer-avatar">M</div>
+                            <div>
+                                <h4 class="farmer-name">Murugan K.</h4>
+                                <div class="farmer-loc">Farmer, Salem</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Very transparent daily rates. The tractor was clean, fully fueled, and arrived right at my field on schedule."</p>
+                        <div class="farmer-profile">
+                            <div class="farmer-avatar">S</div>
+                            <div>
+                                <h4 class="farmer-name">Selvam R.</h4>
+                                <div class="farmer-loc">Farmer, Coimbatore</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"As a tractor owner, FarmEase helps me rent out my equipment when not in use. Excellent support and hassle-free payments."</p>
+                        <div class="farmer-profile">
+                            <div class="farmer-avatar">R</div>
+                            <div>
+                                <h4 class="farmer-name">Ramanathan P.</h4>
+                                <div class="farmer-loc">Owner, Madurai</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2 class="cta-title">Ready to Elevate Your Farm Production?</h2>
+            <p class="cta-desc">Rent top-rated tractors, harvesters, and tools today. Save time and money with FarmEase.</p>
+            <a href="/equipment" class="btn-hero-primary btn-lg">Explore All Equipment</a>
+        </div>
+    </section>
+{% endblock %}

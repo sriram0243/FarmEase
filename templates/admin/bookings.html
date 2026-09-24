@@ -1,0 +1,50 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block title %}Manage Bookings - Admin | FarmEase{% endblock %}
+{% block header_title %}Booking Master Registry{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0">All System Bookings ({{ bookings|length }})</h5>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Equipment</th>
+                    <th>Dates</th>
+                    <th>Days</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in bookings %}
+                <tr>
+                    <td>#{{ b.id }}</td>
+                    <td>
+                        <div class="fw-bold">{{ b.user_name }}</div>
+                        <span class="text-muted small">{{ b.user_email or 'farmer@farmease.com' }}</span>
+                    </td>
+                    <td class="fw-semibold text-dark">{{ b.equipment_name }}</td>
+                    <td>
+                        <span class="small text-muted"><i class="fa-solid fa-calendar me-1 text-success"></i> {{ b.start_date }} to {{ b.end_date }}</span>
+                    </td>
+                    <td>{{ b.days }} days</td>
+                    <td class="fw-bold text-success">₹{{ "{:,.2f}".format(b.total_amount) }}</td>
+                    <td>
+                        <span class="badge {% if b.status == 'Confirmed' %}bg-success{% elif b.status == 'Pending' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-pill">
+                            {{ b.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

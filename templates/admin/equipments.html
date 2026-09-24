@@ -1,0 +1,113 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block title %}Manage Equipment - Admin | FarmEase{% endblock %}
+{% block header_title %}Equipment Inventory Management{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0">All Registered Machinery ({{ equipments|length }})</h5>
+        <button class="btn btn-success rounded-pill px-4 fw-semibold" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">
+            <i class="fa-solid fa-plus me-1"></i> Add New Equipment
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Equipment</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                    <th>Rate / Day</th>
+                    <th>Owner</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in equipments %}
+                <tr>
+                    <td>#{{ item.id }}</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="{{ url_for('static', filename='images/equipment/' ~ item.image) }}" alt="" class="rounded" style="width: 45px; height: 40px; object-fit: contain;">
+                            <div>
+                                <div class="fw-bold">{{ item.name }}</div>
+                                <span class="text-muted small">{{ item.hp }} • {{ item.fuel_type }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-light text-dark border">{{ item.category }}</span></td>
+                    <td>{{ item.location }}</td>
+                    <td class="fw-bold text-success">₹{{ "{:,.0f}".format(item.price_per_day) }}</td>
+                    <td>{{ item.owner_name }}</td>
+                    <td>
+                        <span class="badge {% if item.status == 'Available' %}bg-success{% else %}bg-secondary{% endif %} rounded-pill">
+                            {{ item.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal for Add Equipment -->
+<div class="modal fade" id="addEquipmentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title fw-bold">Add New Agricultural Machinery</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Equipment Name</label>
+                            <input type="text" class="form-control" placeholder="e.g. Swaraj 744 FE" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Category</label>
+                            <select class="form-select">
+                                <option>Tractors</option>
+                                <option>Harvesters</option>
+                                <option>Rotavators</option>
+                                <option>Sprayers</option>
+                                <option>Seeders</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Price per Day (₹)</label>
+                            <input type="number" class="form-control" placeholder="1200" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Location</label>
+                            <input type="text" class="form-control" placeholder="Coimbatore" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Horsepower / Type</label>
+                            <input type="text" class="form-control" placeholder="48 HP" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter specifications and features..."></textarea>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">Save Equipment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
